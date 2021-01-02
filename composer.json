@@ -1,0 +1,27 @@
+{
+  "name": "ckamaury/phpmagicfunctions",
+  "description": "PHP Magic Functions.",
+  "type": "library",
+  "license": "LGPL-3.0",
+  "version": "1.0.0",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Romain FRANCOIS"
+    }
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5"
+  },
+  "autoload": {
+    "files": ["src/Array.php"]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CkAmaury\\PhpMagicFunctionsTests\\": "tests/PhpMagicFunctionsTests"
+    }
+  }
+}
