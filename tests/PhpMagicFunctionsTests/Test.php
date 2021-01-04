@@ -2,6 +2,8 @@
 
 namespace CkAmaury\PhpMagicFunctionsTests;
 
+use CkAmaury\PhpMagicFunctions\ArrayUtils;
+use CkAmaury\PhpMagicFunctions\NumberUtils;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -13,9 +15,9 @@ class Test extends TestCase{
             1,2,3,4,5,6
         ];
 
-        Assert::assertSame(1,array_get_first($array));
-        Assert::assertSame(6,array_get_last($array));
-        Assert::assertSame(2,array_get(1,$array));
+        Assert::assertSame(1,ArrayUtils::get_first($array));
+        Assert::assertSame(6,ArrayUtils::get_last($array));
+        Assert::assertSame(2,ArrayUtils::get(1,$array));
     }
 
     public function testArrayWithKeys(){
@@ -26,15 +28,15 @@ class Test extends TestCase{
             'middle' => "!"
         ];
 
-        Assert::assertSame("Hello",array_get_first($array));
-        Assert::assertSame("!",array_get_last($array));
-        Assert::assertSame("World",array_get('first',$array));
+        Assert::assertSame("Hello",ArrayUtils::get_first($array));
+        Assert::assertSame("!",ArrayUtils::get_last($array));
+        Assert::assertSame("World",ArrayUtils::get('first',$array));
 
-        array_replace_key('first','last',$array);
+        ArrayUtils::replace_key('first','last',$array);
         Assert::assertCount(2,$array);
-        Assert::assertSame("World",array_get('last',$array));
+        Assert::assertSame("World",ArrayUtils::get('last',$array));
 
-        array_replace_keys(['middle','last'],['last','first'],$array);
+        ArrayUtils::replace_keys(['middle','last'],['last','first'],$array);
         Assert::assertCount(1,$array);
 
         $array = [
@@ -44,11 +46,11 @@ class Test extends TestCase{
         ];
 
 
-        array_change_keys(['first','middle','last'],$array);
+        ArrayUtils::change_keys(['first','middle','last'],$array);
 
-        Assert::assertNotSame("Hello",array_get('first',$array));
-        Assert::assertNotSame("World",array_get('middle',$array));
-        Assert::assertNotSame("!",array_get('last',$array));
+        Assert::assertNotSame("Hello",ArrayUtils::get('first',$array));
+        Assert::assertNotSame("World",ArrayUtils::get('middle',$array));
+        Assert::assertNotSame("!",ArrayUtils::get('last',$array));
 
         $array = [
             'last' => "Hello",
@@ -56,14 +58,42 @@ class Test extends TestCase{
             'middle' => "!"
         ];
 
-        array_change_keys(['first','middle','last'],$array,true);
+        ArrayUtils::change_keys(['first','middle','last'],$array,true);
 
-        Assert::assertSame("Hello",array_get('first',$array));
-        Assert::assertSame("World",array_get('middle',$array));
-        Assert::assertSame("!",array_get('last',$array));
+        Assert::assertSame("Hello",ArrayUtils::get('first',$array));
+        Assert::assertSame("World",ArrayUtils::get('middle',$array));
+        Assert::assertSame("!",ArrayUtils::get('last',$array));
 
         $this->expectExceptionMessage("Array & New_Keys have not the same size.");
-        array_change_keys(['plop'],$array);
+        ArrayUtils::change_keys(['plop'],$array);
+
+    }
+
+    public function testNumberUtils(){
+
+        $a = 0;
+        $b = 1;
+
+        $c = NumberUtils::getSuperior($a,$b);
+        Assert::assertEquals($b,$c);
+        Assert::assertNotEquals($a,$c);
+
+        $c = NumberUtils::getInferior($a,$b);
+        Assert::assertEquals($a,$c);
+        Assert::assertNotEquals($b,$c);
+
+        $a = -15.89;
+        $b = +28.97;
+
+        $c = NumberUtils::getSuperior($a,$b);
+        Assert::assertEquals($b,$c);
+        Assert::assertNotEquals($a,$c);
+
+        $c = NumberUtils::getInferior($a,$b);
+        Assert::assertEquals($a,$c);
+        Assert::assertNotEquals($b,$c);
+
+
 
     }
 }

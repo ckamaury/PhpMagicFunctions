@@ -17,7 +17,9 @@
     "phpunit/phpunit": "^9.5"
   },
   "autoload": {
-    "files": ["src/Array.php"]
+    "psr-4": {
+      "CkAmaury\\PhpMagicFunctions\\": "src"
+    }
   },
   "autoload-dev": {
     "psr-4": {
