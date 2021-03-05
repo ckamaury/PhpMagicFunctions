@@ -21,10 +21,10 @@ class ConverterUtils{
     }
 
     static function convertNauticalMilesToMiles(float $nautical_miles,int $round = 2){
-        return round($nautical_miles * (50.292 / 57.875),$round);
+        return round($nautical_miles / 0.868976242,$round);
     }
     static function convertMilesToNauticalMiles(float $miles,int $round = 2){
-        return round($miles / (50.292 / 57.875),$round);
+        return round($miles * 0.868976242,$round);
     }
 
     static function convertMetersToFeet(float $meters,int $round = 2){
