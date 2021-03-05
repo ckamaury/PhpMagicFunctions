@@ -42,6 +42,6 @@ class ConverterUtils{
     }
 
     static function convertMachInknots(float $mach,int $round = 2){
-        return round($mach * 666.739,$round);
+        return round($mach * 600,$round);
     }
 }
